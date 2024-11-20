@@ -1,21 +1,29 @@
 
 import pandas as pd
 import os
-from object_class import *
-Root = "./bills-19"
+from bill_tool import *
+import argparse
 
-Target_bill = "Qiu_Target_9-19.csv"
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--file", help="The file to be read", required=True)
 
-bill = pd.read_csv(os.path.join(Root,Target_bill))
+args = parser.parse_args()
+
+Target_bill = args.file
+
+bill = pd.read_csv(Target_bill)
 total_price = 0
 
 Mark = Patron("Mark")
 
 
 for line in bill.iterrows():
+    if line[1]['name'] == "DriverFee":
+        print("Driver Fee: ", line[1]['price'])
+        continue
     it = Item(line[1]['name'], line[1]['price'])
     quant = line[1]['quantity']
     Mark.add(it, line[1]['quantity'])
 
-print(Mark.get_total())
+print(round(Mark.get_total(), 2))
     

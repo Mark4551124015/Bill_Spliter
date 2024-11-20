@@ -1,0 +1,13 @@
+name,price,quantity,member
+水, 5.99, 4, Qiu&Hu&Li&Xiao
+水, 5.99, 1, Feng&Zhou
+可颂, 5.99, 1, All
+面包, 4.99, 1, Xiao&Feng&Zhou
+薯片, 6.99, 1, Feng
+薯片打折, -2.0, 1, Feng
+意面, 11.49, 1, Feng&Qiu&Xiao
+意面酱, 12.99, 1, Feng&Qiu&Xiao
+芝士粉, 8.79, 1, Feng&Qiu&Xiao
+苹果, 6.99, 1, Qiu
+猪排, 15.43, 1, None
+DriverFee, 10.0, 1, All

@@ -1,6 +1,10 @@
 from bill_tool import *
 from glob import glob
 import networkx as nx
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-r", "--root", help="The root directory of the bills", required=True)
 
 
 Member = ["Qiu", "Feng", "Li", "Xiao", "Zhou", "Hu"]
@@ -21,7 +25,12 @@ def split(bill_path):
         bill = check_bill(bill_path, patrons)
         summation = round(bill['total_price'], 2)
         payer = bill['paid']
+        driver = bill['driver']
         print("The bill is paid by:", payer, "at", bill['event'], "on", bill['date'])
+        if driver in Member:
+            print("The driver is:", driver)
+        else:
+            print("There is no Driver")
         print("Summation of the bill is: ", summation)
         memPaid[payer] += summation
         for man in Member:
@@ -36,11 +45,16 @@ def split(bill_path):
     for mem in memPaid:
         if memPaid[mem] > 0:
             print(mem, "paid: ", round(memPaid[mem],2))
+        
+    for mem in Member:
+        if patrons[mem].driver_income > 0:
+            print(mem, "earned driver fee: ", round(patrons[mem].driver_income,2))
     reductMap(payMap)
     printMap(payMap)
     print("=============================================")
 
     
 if __name__ == "__main__":
-    split("./bills-19")
-    
+    args = parser.parse_args()
+
+    split(args.root)
